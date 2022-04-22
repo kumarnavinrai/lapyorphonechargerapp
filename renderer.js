@@ -56,6 +56,7 @@ $( "#open-settings" ).on( "click", function( event ) {
   $( "#open-settings" ).hide();
   $("#save-settings").show();
   $("#urltbox").val(ls.get('urltoopen'))
+  $("#apiurltbox").val(ls.get('apiurltoopen'))
 });
 
 $( "#save-settings" ).on( "click", function( event ) {
@@ -64,10 +65,22 @@ $( "#save-settings" ).on( "click", function( event ) {
     alert('Url not valid!')
     return false;
   }
+  if(!isUrlValid($("#apiurltbox").val())){
+    event.preventDefault();
+    alert('Url not valid!')
+    return false;
+  }
   ls.set('urltoopen', $("#urltbox").val());
+  ls.set('apiurltoopen', $("#apiurltbox").val());
   $("#urltbox").hide();
+  $("#apiurltbox").hide();
   $( "#open-settings" ).show();
   $("#save-settings").hide();
   ipcRenderer.send('open-settings', $("#urltbox").val())
   
 });
+
+$( "#urltbox" ).on( "dblclick", function( event ) {
+  $("#apiurltbox").show();
+});
+

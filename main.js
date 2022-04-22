@@ -3,8 +3,7 @@ const isCharging = require('is-charging');
 const batteryLevel = require('battery-level');
 const path = require('path');
 const axios = require('axios');
-
-
+let ls = require('local-storage');
 
 
 let mainWindow
@@ -38,11 +37,11 @@ function createBrowserWindow(arg) {
 }
 
 function switchOnCharger(check) {
-
+  let apiurl = ls.get('apiurltoopen');
   switch (true) {
     case check === 'phoneon':
        // Make a request for a user with a given ID
-        axios.get('https://api.zippopotam.us/us/33162')
+        axios.get('https://api.zippopotam.us/us/33162') //apiurl
         .then(function (response) {
           // handle success
           console.log(response);
@@ -59,7 +58,7 @@ function switchOnCharger(check) {
     case check === 'phoneoff':
 
       // Make a request for a user with a given ID
-      axios.get('https://api.zippopotam.us/us/33162')
+      axios.get('https://api.zippopotam.us/us/33162') //apiurl
       .then(function (response) {
         // handle success
         console.log(response);
@@ -75,7 +74,7 @@ function switchOnCharger(check) {
       break;
     case check === 'lapyon':
       // Make a request for a user with a given ID
-      axios.get('https://api.zippopotam.us/us/33162')
+      axios.get('https://api.zippopotam.us/us/33162') //apiurl
       .then(function (response) {
         // handle success
         console.log(response);
@@ -90,7 +89,7 @@ function switchOnCharger(check) {
       break;
     case check === 'lapyoff':
       // Make a request for a user with a given ID
-      axios.get('https://api.zippopotam.us/us/33162')
+      axios.get('https://api.zippopotam.us/us/33162') //apiurl
       .then(function (response) {
         // handle success
         console.log(response);
@@ -231,3 +230,4 @@ ipcMain.on('ping-bad', event => {
 ipcMain.on('open-settings', (event,arg) => {
   createBrowserWindow(arg);
 })
+
